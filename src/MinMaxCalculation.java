@@ -16,7 +16,7 @@ public class MinMaxCalculation implements View {
 
 	public MinMaxCalculation() {
 		Min = 0;
-		jtfMin = new JTextField(5);
+		jtfMin = new JTextField(9);
 		jtfMin.setEditable(false);
 		name = "Min and Max ";
 	}
