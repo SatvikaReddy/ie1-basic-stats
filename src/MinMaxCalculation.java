@@ -1,46 +1,45 @@
 import java.util.ArrayList;
-import java.util.Collections;
-
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
-
+import java.util.Collections;
 
 public class MinMaxCalculation implements View {
 
-	//Instance variables
-	double Min;
-    double Max; 
-	JTextField jtfMin;  
-    String minmax;
-	String name;
+	private double max;
+	private double min;
+	private String name;
+	private JTextField jtfMinMax;
 
 	public MinMaxCalculation() {
-		Min = 0;
-		jtfMin = new JTextField(9);
-		jtfMin.setEditable(false);
-		name = "Min and Max ";
+		min = 0;
+		max = 0;
+		jtfMinMax = new JTextField(9);
+		jtfMinMax.setEditable(false);
+		name = "Min, Max ";
 	}
 
 	@Override
 	public void update(ArrayList<Double> numbers) {
-		Min = BasicStats.minimum(BasicStats.getArrayDouble(numbers));
-        Max = BasicStats.maximum(BasicStats.getArrayDouble(numbers));
+		if (numbers.isEmpty()) {
+			min = 0;
+			max = 0;
+		} else {
+			min = Collections.min(numbers);
+			max = Collections.max(numbers);
+		}
 
-        minmax = String.valueOf(Min) + " " + String.valueOf(Max);
-        
-
-    //Set text
-    jtfMin.setText("" + minmax );
+		// Set text
+		jtfMinMax.setText(String.format("%.2f, %.2f", min, max));
 	}
 
 	@Override
 	public void reset() {
-		jtfMin.setText("");
+		jtfMinMax.setText("");
 	}
 
 	@Override
 	public JTextComponent show() {
-		return jtfMin;
+		return jtfMinMax;
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class MinMaxCalculation implements View {
 	}
 
 	public String getMinMax() {
-		return minmax;
+		return String.format("%.2f, %.2f", min, max);
 	}
-
 }
+
